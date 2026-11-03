@@ -15,7 +15,7 @@ what a pin is are the `agent-platform-skill-authoring` skill. The one reference 
 
 ## The agent unit
 
-One agent is one Flux `HelmRelease` of the `agent` chart in the `kagent` namespace. helm-controller
+One agent is one Flux `HelmRelease` of the `agent` chart in the agents' namespace that `x_agent-manager_get_info` reports. helm-controller
 renders an `Agent` — its template inline (prompt, model config, pinned skills and plugins, tool
 bindings) and the `Harness` that runs it by name — and, for a tooled agent, a `RemoteMCPServer` named
 after the agent that points at Muster with the agent's toolset. The Harness compiles the golden
@@ -30,7 +30,7 @@ Where the reference lives — fetch it, never quote it from memory:
   with the intended values returns the composed `HelmRelease` (and `OCIRepository`) and every
   violation, writing nothing. It is also how a GitOps `HelmRelease` is drafted: validate, copy.
 - The CRDs and the live objects: `x_kubernetes_api_resources` for the `api.kagent.dev` group, then
-  `x_kubernetes_get` of `agents`, `harnesses`, `remotemcpservers`, `modelconfigs` in `kagent` and of
+  `x_kubernetes_get` of `agents`, `harnesses`, `remotemcpservers`, `modelconfigs` in the agents' namespace and of
   `helmreleases` for the releases; `agenttemplates` when an Agent names one in `spec.templateRef`
   instead of carrying its template inline. The conditions are in the Agent's `status.conditions`.
 
@@ -67,7 +67,7 @@ head. A GitOps agent re-pins through a commit that changes the pinned commit.
   avatar. The display name and the description are what the roster, Slack and the portal show.
 - **Model config**: one from the live list, never invented — an agent on a missing or not-accepted
   config never boots.
-- **Toolset**: the smallest that does the job; `preset:full` only on an explicit request. What the
+- **Toolset**: the smallest that does the job; the broadest preset only on an explicit request (list presets with `filter_tools` and `include_presets`). What the
   selectors are and how to see what a preset resolves to: the `agent-platform-tools` skill.
 - **Skills**: always pinned, and a private skills repository only through GitOps — what a pin is and
   what the release needs for a private repository: the `agent-platform-skill-authoring` skill.
@@ -81,7 +81,7 @@ head. A GitOps agent re-pins through a commit that changes the pinned commit.
 
 ## Status and troubleshooting
 
-`workflow_agent-status` (`name`, `namespace` = `kagent`) is the one call: the verdict — `ready`,
+`workflow_agent-status` (`name`, `namespace` = the agents' namespace) is the one call: the verdict — `ready`,
 `progressing`, `failed`, `not_found` — with a summary, the release's condition and the golden-worker
 log lines that name the agent. The Agent's own conditions (`Accepted`, `ResolvedRefs`, `Compatible`,
 `Ready`) are in its `status.conditions`. `progressing` for about a minute after a write is normal.

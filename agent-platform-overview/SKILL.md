@@ -59,10 +59,10 @@ The portal, the presets and the docs use the same three names:
 ## How people reach agents
 
 - **Developer portal** → Agent Platform → Agents: pick an agent, start a session, watch the tool calls,
-  answer its questions; sessions are private to the signed-in person. Every installation has a portal;
-  Giant Swarm's is https://devportal.giantswarm.io (https://docs.giantswarm.io/overview/developer-portal/agent-platform/).
-- **Slack**: on the Giant Swarm installation the **Swarmgeist** app — `/swarmgeist <question>` allows to
-  select an agent; one thread is one session; a one-time *Sign in to Giant Swarm* links the Slack account to the person.
+  answer its questions; sessions are private to the signed-in person. Every installation has a portal at
+  its own URL (https://docs.giantswarm.io/overview/developer-portal/agent-platform/).
+- **Slack**, where the installation runs klaus-gateway: the installation's Slack app; one thread is one
+  session; a one-time sign-in links the Slack account to the person.
 - **IDE and CLI**: Claude Code, Cursor, VS Code, the `muster` CLI and any MCP client with remote OAuth
   connect to `https://muster.<installation>.<base domain>/mcp`, the endpoint the agents use too
   (https://docs.giantswarm.io/getting-started/ai-agent-setup/).
@@ -116,5 +116,4 @@ a function of its own; the contract, the name shapes and the `management_cluster
   `kubectl` reads back, and GitOps-managed resources are read-only in it.
 - In Slack every participant of a thread must be signed in before anything is dispatched (no
   service-account fallback) and Slack guests cannot use the app; the agent a bare mention reaches is a
-  platform setting (`klausGateway.a2a.defaultAgent`) — on the Giant Swarm installation the Swarmgeist
-  agent, the platform's read-only explainer.
+  platform setting (`klausGateway.a2a.defaultAgent`).

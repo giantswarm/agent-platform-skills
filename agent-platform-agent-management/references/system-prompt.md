@@ -9,8 +9,7 @@ under a page; everything longer is a skill.
 
 Agents see Muster's meta-tools as functions and everything behind them as names. A model that
 emits `x_kubernetes_list` as a function name gets `Tool 'x_kubernetes_list' not found` and loses the
-turn. Put this paragraph, or your own words for it, into the prompt of every agent whose toolset is
-not `preset:none`:
+turn. Put this paragraph, or your own words for it, into the prompt of every agent with tools:
 
 ```text
 Your MCP tools come from an aggregator, muster, via meta-tools: `filter_tools` discovers

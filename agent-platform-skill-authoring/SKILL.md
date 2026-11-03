@@ -8,8 +8,9 @@ metadata:
 # Authoring skills
 
 A skill is a folder with a `SKILL.md` and optional resources, written to the agentskills.io
-specification (https://agentskills.io/specification). The platform's public skills live in
-https://github.com/giantswarm/agent-skills, one directory per skill at the root; a team's skills
+specification (https://agentskills.io/specification). Giant Swarm's curated skills live in
+https://github.com/giantswarm/agent-platform-skills, one directory per skill at the root; the
+repositories an installation offers come from `x_agent-manager_get_info`; a team's skills
 can live in any git repository or an OCI image. This skill covers writing and reviewing skills;
 creating agents and re-pinning their skills is the `agent-platform-agent-management` skill, how
 Muster and its tools work is the `agent-platform-tools` skill.
@@ -101,8 +102,10 @@ the release before any boot. The evidence: `workflow_agent-status` and the
 
 ## Reviewing a skill
 
+A full review with findings and a score is the `agent-platform-skill-review` skill.
+
 - Frontmatter: only the six fields; `name` = directory; the description is a trigger under 1024
-  characters. `python3 scripts/validate_skills.py` in `giantswarm/agent-skills` checks this and
+  characters. `python3 scripts/validate_skills.py` in the skills repository (giantswarm/agent-platform-skills carries it) checks this and
   runs on every pull request — run it before opening one.
 - Does any line state something the agent could fetch? Replace it with the recipe.
 - Does any section belong to another skill? Replace it with that skill's name.
